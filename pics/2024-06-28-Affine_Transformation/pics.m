@@ -117,7 +117,7 @@ switch what_transform
     case "shear"
         mtx = [...
             2, 1, 0; 
-            0, 2, 0; 
+            1, 2, 0; 
             0, 0, 1];
     case "reflection"
         mtx = [0, 1, 0;
@@ -180,10 +180,10 @@ vertices_original = [
 faces = [
     1 2 3 4;  % Face 1
     2 6 7 3;  % Face 2
-    5 1 4 8;  % Face 3
-    4 3 7 8;  % Face 4
-    5 6 2 1   % Face 5
-    6 5 8 7;  % Face 6 Head
+    6 5 8 7;  % Face 3
+    5 1 4 8;  % Face 4
+    4 3 7 8;  % Face 5
+    5 6 2 1   % Face 6
     ];
 
 img = imread('cameraman.tif');
@@ -217,7 +217,7 @@ for i_step = 0:n_steps
     vertices = (temp_Mtx * vertices_original')';
 
     % Plot the other faces of the cube
-    for i = 1:5
+    for i = [1,2,4,5,6]
         h(i) = patch('Vertices', vertices, 'Faces', faces(i,:), ...
             'FaceColor', lines(1), 'EdgeColor', 'black', 'FaceAlpha', 0.3);
     end
