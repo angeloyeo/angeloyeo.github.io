@@ -9,7 +9,7 @@ tags: 선형대수학
 lang: ko
 ---
 
-<p align="center"><iframe  src="https://angeloyeo.github.io/p5/2024-06-28-Affine_Transformation/" width="360" height = "370" frameborder="0"></iframe></p>
+<p align="center"><iframe  src="https://angeloyeo.github.io/p5/2024-06-28-Affine_Transformation/" width="400" height = "400" frameborder="0"></iframe></p>
 
 행렬을 이용해 물체를 평행이동 시켜주는 변환은 수학적으로 어떻게 기술될 수 있을까?
 
@@ -141,7 +141,7 @@ $$\begin{bmatrix}x_{new} \\ y_{new} \end{bmatrix}
 
 \begin{bmatrix}x \\ y\end{bmatrix} + \begin{bmatrix}b_1 \\ b_2\end{bmatrix} % 식 (8) $$
 
-위 식에서는 $\begin{bmatrix} x & y\end{bmatrix}^T$ 벡터에 선형변환을 적용한 뒤 $x$ 축으로 $b_1$, $y$ 축으로 $b2$ 만큼 이동시키는 것을 알 수 있다. 참고로 수학에서 평행이동을 시켜주는 양을 "bias"라고도 표현하기도 하므로 $b$라는 알파벳을 활용했다. 
+위 식에서는 $\begin{bmatrix} x & y\end{bmatrix}^T$ 벡터에 선형변환을 적용한 뒤 $x$ 축으로 $b_1$, $y$ 축으로 $b_2$ 만큼 이동시키는 것을 알 수 있다. 참고로 수학에서 평행이동을 시켜주는 양을 "bias"라고도 표현하기도 하므로 $b$라는 알파벳을 활용했다. 
 
 ## 행렬 하나만으로 평행이동을 표현하기 위한 방법
 
@@ -167,7 +167,7 @@ $$\begin{bmatrix}x_{new} \\ y_{new} \\ 1\end{bmatrix}
 
 하지만, 아핀 변환은 한 차원 높은 좌표계에서의 선형 변환이 어떻게 일어나는지 생각할 수 있다면 그 정체를 이해할 수 있으며, 기존의 "선형 변환은 원점을 보존한다"는 지식도 그 기반을 단단하게 다질 수 있게 된다. 아래는 맨 위의 데모를 조감도로 본 것이다. 1행 3열의 값을 바꿔보면 무슨 일이 일어나는지 생각해보자. 
 
-<p align="center"><iframe  src="https://angeloyeo.github.io/p5/2024-06-28-Affine_Transformation_birdeye/" width="360" height = "370" frameborder="0"></iframe></p>
+<p align="center"><iframe  src="https://angeloyeo.github.io/p5/2024-06-28-Affine_Transformation_birdeye/" width="400" height = "400" frameborder="0"></iframe></p>
 
 1행 3열의 값을 양으로 변화시키면 3차원 공간에서는 정육면체 윗면이 오른쪽으로 밀리게 되지만, 조감도로 투영해보면 사진이 오른쪽으로 이동하는 것과 같은 효과를 가져오게 된다.
 
