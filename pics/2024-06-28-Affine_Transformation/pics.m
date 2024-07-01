@@ -13,13 +13,21 @@ cmap = flipud(jet(numel(X)));
 h = zeros(1, numel(X));
 
 v = VideoWriter('vector2dot.mp4', 'MPEG-4');
-v.FrameRate = 30; % 프레임 속도 설정 (초당 프레임 수)
+v.FrameRate = 60; % 프레임 속도 설정 (초당 프레임 수)
+v.Quality = 100;
 open(v);
 
 for idx = 1:numel(X)
     h(idx) = arrow([0, 0], [X(idx), Y(idx)], 'color', cmap(idx,:), 'linewidth', 1, 'EdgeColor', 'k');
     drawnow;
     frame = getframe(gcf);
+    if mod(size(frame.cdata, 1), 2) ~= 0
+        frame.cdata(end+1, :, :) = uint8(ones(1, size(frame.cdata, 2), 3) * 255);
+    end
+
+    if mod(size(frame.cdata, 2), 2) ~= 0
+        frame.cdata(:, end+1, :) = uint8(ones(size(frame.cdata, 1), 1, 3) * 255);
+    end
     writeVideo(v, frame);
 end
 
@@ -29,11 +37,26 @@ for idx = 1:numel(X)
     drawnow;
 
     frame = getframe(gcf);
+    if mod(size(frame.cdata, 1), 2) ~= 0
+        frame.cdata(end+1, :, :) = uint8(ones(1, size(frame.cdata, 2), 3) * 255);
+    end
+
+    if mod(size(frame.cdata, 2), 2) ~= 0
+        frame.cdata(:, end+1, :) = uint8(ones(size(frame.cdata, 1), 1, 3) * 255);
+    end
     writeVideo(v, frame);
 end
 
 for i = 1:30 % dummy frame at the end
     frame = getframe(gcf);
+
+    if mod(size(frame.cdata, 1), 2) ~= 0
+        frame.cdata(end+1, :, :) = uint8(ones(1, size(frame.cdata, 2), 3) * 255);
+    end
+
+    if mod(size(frame.cdata, 2), 2) ~= 0
+        frame.cdata(:, end+1, :) = uint8(ones(size(frame.cdata, 1), 1, 3) * 255);
+    end
     writeVideo(v, frame);
 end
 close(v);
@@ -44,9 +67,9 @@ hold on;
 scatter(X, Y, 100, cmap, "filled","MarkerEdgeColor", "k", "linewidth", 1.5);
 
 %% 2D Transformation
-% what_transform = "permutation";
+what_transform = "permutation";
 % what_transform = "rotation";
-what_transform = "shear";
+% what_transform = "shear";
 
 switch what_transform
     case "rotation"
@@ -61,7 +84,7 @@ end
 v = VideoWriter("2d_"+what_transform+".mp4", "MPEG-4");
 open(v);
 plotXYPlane()
-set(gcf,'position', [-669.0000  422.3333  530.6667  356.6667]);
+set(gcf,'position', [669.0000  422.3333  530.6667  356.6667]);
 hold on;
 img = imread('cameraman.tif');
 img = flipud(img);
@@ -88,6 +111,14 @@ for i_step = 0:n_steps
     view(2)
     drawnow;
     frame = getframe(gcf);
+
+    if mod(size(frame.cdata, 1), 2) ~= 0
+        frame.cdata(end+1, :, :) = uint8(ones(1, size(frame.cdata, 2), 3) * 255);
+    end
+
+    if mod(size(frame.cdata, 2), 2) ~= 0
+        frame.cdata(:, end+1, :) = uint8(ones(size(frame.cdata, 1), 1, 3) * 255);
+    end
     writeVideo(v, frame);
     if i_step < n_steps
         delete(h);
@@ -97,6 +128,14 @@ end
 
 for i = 1:30
     frame = getframe(gcf);
+
+    if mod(size(frame.cdata, 1), 2) ~= 0
+        frame.cdata(end+1, :, :) = uint8(ones(1, size(frame.cdata, 2), 3) * 255);
+    end
+
+    if mod(size(frame.cdata, 2), 2) ~= 0
+        frame.cdata(:, end+1, :) = uint8(ones(size(frame.cdata, 1), 1, 3) * 255);
+    end
     writeVideo(v, frame)
 end
 
@@ -105,8 +144,8 @@ close(v);
 %% 3D Transformation
 
 % what_transform = "rotation";
-what_transform = "shear";
-% what_transform = "reflection";
+% what_transform = "shear";
+what_transform = "reflection";
 
 switch what_transform
     case "rotation"
@@ -236,6 +275,13 @@ for i_step = 0:n_steps
 
     drawnow;
     frame = getframe(gcf);
+    if mod(size(frame.cdata, 1), 2) ~= 0
+        frame.cdata(end+1, :, :) = uint8(ones(1, size(frame.cdata, 2), 3) * 255);
+    end
+
+    if mod(size(frame.cdata, 2), 2) ~= 0
+        frame.cdata(:, end+1, :) = uint8(ones(size(frame.cdata, 1), 1, 3) * 255);
+    end
     writeVideo(v, frame);
 
     if i_step < n_steps
@@ -245,6 +291,13 @@ end
 
 for i = 1:30
     frame = getframe(gcf);
+    if mod(size(frame.cdata, 1), 2) ~= 0
+        frame.cdata(end+1, :, :) = uint8(ones(1, size(frame.cdata, 2), 3) * 255);
+    end
+
+    if mod(size(frame.cdata, 2), 2) ~= 0
+        frame.cdata(:, end+1, :) = uint8(ones(size(frame.cdata, 1), 1, 3) * 255);
+    end
     writeVideo(v, frame)
 end
 
