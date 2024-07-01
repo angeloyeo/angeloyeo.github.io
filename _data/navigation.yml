@@ -469,6 +469,8 @@ docs-ko:
         url:    2021/12/20/positive_definite.html
       - title:  마할라노비스 거리
         url:    2022/09/28/Mahalanobis_distance.html
+      - title:  아핀 변환
+        url:    2024/06/28/Affine_Transformation.html
 
   - title:      기초 미적분학
     children:
