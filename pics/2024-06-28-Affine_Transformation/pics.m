@@ -67,9 +67,10 @@ hold on;
 scatter(X, Y, 100, cmap, "filled","MarkerEdgeColor", "k", "linewidth", 1.5);
 
 %% 2D Transformation
-what_transform = "permutation";
+% what_transform = "permutation";
 % what_transform = "rotation";
 % what_transform = "shear";
+what_transform = "scaling";
 
 switch what_transform
     case "rotation"
@@ -80,6 +81,8 @@ switch what_transform
         mtx = [2, 1; 1, 2];
     case "permutation"
         mtx = [0, 1; 1, 0];
+    case "scaling"
+        mtx = [2, 0; 0, 1];
 end
 v = VideoWriter("2d_"+what_transform+".mp4", "MPEG-4");
 open(v);
@@ -145,9 +148,14 @@ close(v);
 
 % what_transform = "rotation";
 % what_transform = "shear";
-what_transform = "reflection";
+% what_transform = "reflection";
+what_transform = "scaling";
 
 switch what_transform
+    case "scaling"
+        mtx = [2, 0, 0; 
+            0, 1, 0;
+            0,0,1];
     case "rotation"
         q = pi/3;
         mtx = [cos(q), -sin(q), 0; 
