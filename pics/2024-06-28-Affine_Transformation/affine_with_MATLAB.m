@@ -9,7 +9,7 @@ T = [1 0 tx; 0 1 ty; 0 0 1];
 theta = 30; % 30도 회전
 R = [cosd(theta) -sind(theta) 0; sind(theta) cosd(theta) 0; 0 0 1];
 TR = T * R; % 이동 후 회전
-
+n_steps = 100;
 for i_step = 0:n_steps
     temp_TR = (TR-eye(3)) * i_step/n_steps + eye(3);
     tform_tr = affinetform2d(temp_TR);
