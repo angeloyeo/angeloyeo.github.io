@@ -9,6 +9,10 @@ tags: Signal_Processing
 lang: en
 ---
 
+이 문서의 한국어 버전은 아래의 위치에서 찾을 수 있습니다. (You can find a Korean version of this article as below.)
+
+* [이산 컨볼루션과 임펄스 응답](https://angeloyeo.github.io/2019/06/18/Discrete_Time_Convolution.html)
+  
 # Prerequisites
 
 To understand this post well, it is recommended to have knowledge of the following topics:

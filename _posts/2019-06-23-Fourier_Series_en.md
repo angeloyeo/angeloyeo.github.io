@@ -9,6 +9,10 @@ tags: Fourier Signal_Processing
 lang: en
 ---
 
+이 문서의 한국어 버전은 아래의 위치에서 찾을 수 있습니다. (You can find a Korean version of this article as below.)
+
+* [푸리에 급수(Fourier Series)](https://angeloyeo.github.io/2019/06/23/Fourier_Series.html)
+
 <p align="center"><iframe width = "610" height = "410" frameborder = "0" src="https://angeloyeo.github.io/p5/Fourier_Series_Practice/"></iframe><br>What Fourier Series tells you: a periodic function can be represented as sum of trigonometric functions.</p>
 
 # Prerequisites

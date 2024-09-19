@@ -10,6 +10,10 @@ lang: en
 
 ---
 
+이 문서의 한국어 버전은 아래의 위치에서 찾을 수 있습니다. (You can find a Korean version of this article as below.)
+
+* [연속시간 컨볼루션(Continuous Time Convolution)](https://angeloyeo.github.io/2019/07/01/Continuous_Time_Convolution.html)
+
 <p align="center">
    <iframe width = "530" height = "385" frameborder = "0" src="https://angeloyeo.github.io/p5/CT_Convolution_2/p5/"></iframe>
    <br>

@@ -22,6 +22,10 @@ What Sampling theorem tells you: :
 
 {% raw %}
 
+이 문서의 한국어 버전은 아래의 위치에서 찾을 수 있습니다. (You can find a Korean version of this article as below.)
+
+* [섀넌의 샘플링 정리](https://angeloyeo.github.io/2019/07/11/Shannon_sampling_theorem.html)
+
 # Time Sampling?
 
 In order to display physical (analog) signals on a digital screen, sampling is necessary. In signal processing, when we talk about sampling, we usually refer to time sampling.

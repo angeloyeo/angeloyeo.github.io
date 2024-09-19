@@ -9,6 +9,9 @@ tags: Basic_Math
 lang: en
 ---
 
+이 문서의 한국어 버전은 아래의 위치에서 찾을 수 있습니다. (You can find a Korean version of this article as below.)
+
+* [허근의 위치](https://angeloyeo.github.io/2019/06/16/imaginary_root.html)
 
 # 1. The Existence of Complex Roots
 

@@ -10,6 +10,10 @@ lang: en
 
 ---
 
+이 문서의 한국어 버전은 아래의 위치에서 찾을 수 있습니다. (You can find a Korean version of this article as below.)
+
+* [허수의 존재 의미에 대하여](https://angeloyeo.github.io/2019/06/15/imaginary_number.html)
+  
 # 1. Discovering numbers
 
 Before we delve into the concept of complex numbers, we need to consider the system of numbers. Generally, the system of numbers is known as follows.

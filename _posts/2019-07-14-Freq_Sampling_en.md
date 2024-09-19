@@ -11,6 +11,10 @@ lang: en
 
 {% raw %}
 
+이 문서의 한국어 버전은 아래의 위치에서 찾을 수 있습니다. (You can find a Korean version of this article as below.)
+
+* [주파수 샘플링과 DFT](https://angeloyeo.github.io/2019/07/14/Freq_Sampling.html)
+
 # Frequency Sampling and DFT
 
 ## The Purpose of Frequency Sampling

@@ -367,7 +367,7 @@ docs-en:
       - title:  Discrete Time Fourier Transform
         url:    2019/07/09/DTFT_en.html
       - title:  Fourier Transform and Phase
-        url:    2019/10/11/Foureir_Phase_en.html
+        url:    2019/10/11/Fourier_Phase_en.html
       - title:  Shannon's Sampling Theorem
         url:    2019/07/11/Shannon_sampling_theorem_en.html
       - title:  Frequency Sampling and DFT
@@ -728,7 +728,7 @@ docs-ko:
       - title:  이산 시간 푸리에 변환(DTFT)
         url:    2019/07/09/DTFT.html  
       - title:  푸리에 변환과 위상(phase)
-        url:    2019/10/11/Foureir_Phase.html
+        url:    2019/10/11/Fourier_Phase.html
       - title:  섀넌의 샘플링 정리
         url:    2019/07/11/Shannon_sampling_theorem.html
       - title:  주파수 샘플링과 DFT
