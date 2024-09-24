@@ -395,7 +395,7 @@ docs-en:
       - title:  Hilbert Transform
         url:    2019/08/09/Hilbert_Transform_en.html   
       - title:  Wiener Kinchin Theorem
-        url:    2020/10/04/Wiener_Kinchin_en.html
+        url:    2020/10/04/Wiener_Khinchin_en.html
       - title:  Wold's Theorem
         url:    2020/10/05/Wold_theorem_en.html
 
@@ -756,6 +756,6 @@ docs-ko:
       - title:  힐버트 변환
         url:    2019/08/09/Hilbert_Transform.html
       - title:  위너-킨친 정리
-        url:    2020/10/04/Wiener_Kinchin.html
+        url:    2020/10/04/Wiener_Khinchin.html
       - title:  월드 정리
         url:    2020/10/05/Wold_theorem.html
