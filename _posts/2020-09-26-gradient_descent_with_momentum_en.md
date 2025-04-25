@@ -83,7 +83,7 @@ $$b:= b - \alpha V_{db(t)}$$
 
 [//]:# (Equation 4)
 
-(where $\alpha$ is the learning rate.)
+Here, $\alpha$ denotes the learning rate. Additionally, $dW$ represents the derivative of the loss function $L$ with respect to the weight $W$, expressed as $\partial L / \partial W$.
 
 ---
 
@@ -125,17 +125,17 @@ $$=\beta_1^3V_{dw(0)}+ \beta_1^2(1-\beta_1)dW_{(1)}+\beta_1(1-\beta_1)dW_{(2)}+(
 
 Generalizing the discussion above, we can think of what's going to be happening in $k$th iteration.
 
-$$V_{dw(k)} = \beta_1^k V_{dw(0)}+\beta_1^{k-1}(1-\beta_1) V_{dw(1)}+\beta_1^{k-2}(1-\beta_1) V_{dw(2)}+\cdots +\beta_1^0(1-\beta_1)V_{dw(k)}$$
+$$V_{dw(k)} = \beta_1^k V_{dw(0)}+\beta_1^{k-1}(1-\beta_1) dW_{(1)}+\beta_1^{k-2}(1-\beta_1) dW_{(2)}+\cdots +\beta_1^0(1-\beta_1)dW_{(k)}$$
 
 [//]:# (식 12)
 
-$$=\beta_1^kV_{dw(0)}+\sum_{i=1}^{k}\beta_1^{k-i}(1-\beta_1)V_{dw(i)}$$
+$$=\beta_1^kV_{dw(0)}+\sum_{i=1}^{k}\beta_1^{k-i}(1-\beta_1)dW_{(i)}$$
 
 [//]:# (식 13)
 
 Since $V_{dw(0)}$ is initialized as 0 usually, we can get the following result.
 
-$$Equation(13) \Rightarrow \sum_{i=1}^{k}\beta_1^{k-i}(1-\beta_1)V_{dw(i)}$$
+$$식(13) \Rightarrow \sum_{i=1}^{k}\beta_1^{k-i}(1-\beta_1)dW_{(i)}$$
 
 [//]:# (식 14)
 
@@ -143,7 +143,7 @@ It's common to set $\beta_1$ to around 0.9 for Momentum.
 
 Now, let's take another look at equation (11) to rethink the meaning of Momentum.
 
-Looking at equation (11), we see that the current velocity $V_{dw(3)}$ is influenced by past velocities. The older the velocity relative to the current iteration, the more it is multiplied by $\beta_1$, meaning recent velocity values have a greater impact.
+As shown in Equation (11), the current velocity $V_{dw(3)}$ is influenced by past $dW$ values, where older iterations are multiplied by higher powers of $\beta_1$. This demonstrates that more recent gradient values exert greater influence. Considering $dW_{(i)}$ as analogous to an instantaneous force at timestep $i$, we observe that the impact of earlier iterations diminishes progressively through the exponentially decaying weights.
 
 In other words, if the progression of the Gradient were like in Figure 1, the b-axis gradient factors that go up and down would cancel each other out and the speed would gradually approach zero, while the W-axis gradient factors that continue to move to the right would continue to add up, causing the speed to increase gradually as if inertia were at play.
 
