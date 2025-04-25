@@ -87,7 +87,7 @@ $$b:= b - \alpha V_{db(t)}$$
 
 [//]:# (식 4)
 
-(여기서 $\alpha$는 learning rate이다.)
+여기서 $\alpha$는 learning rate이다. 또, $dW$는 전체 로스 $L$에 대해 $\partial L / \partial W$로 손실 함수 $L$을 가중치 $W$로 미분한 값을 의미한다.
 
 ---
 
@@ -130,17 +130,17 @@ $$=\beta_1^3V_{dw(0)}+ \beta_1^2(1-\beta_1)dW_{(1)}+\beta_1(1-\beta_1)dW_{(2)}+(
 
 이를 일반화해서 생각해보면 $k$ 번째 iteration에서는 다음과 같을 것이다.
 
-$$V_{dw(k)} = \beta_1^k V_{dw(0)}+\beta_1^{k-1}(1-\beta_1) V_{dw(1)}+\beta_1^{k-2}(1-\beta_1) V_{dw(2)}+\cdots +\beta_1^0(1-\beta_1)V_{dw(k)}$$
+$$V_{dw(k)} = \beta_1^k V_{dw(0)}+\beta_1^{k-1}(1-\beta_1) dW_{(1)}+\beta_1^{k-2}(1-\beta_1) dW_{(2)}+\cdots +\beta_1^0(1-\beta_1)dW_{(k)}$$
 
 [//]:# (식 12)
 
-$$=\beta_1^kV_{dw(0)}+\sum_{i=1}^{k}\beta_1^{k-i}(1-\beta_1)V_{dw(i)}$$
+$$=\beta_1^kV_{dw(0)}+\sum_{i=1}^{k}\beta_1^{k-i}(1-\beta_1)dW_{(i)}$$
 
 [//]:# (식 13)
 
 보통 $V_{dw(0)}$은 0으로 초기화하므로,
 
-$$식(13) \Rightarrow \sum_{i=1}^{k}\beta_1^{k-i}(1-\beta_1)V_{dw(i)}$$
+$$식(13) \Rightarrow \sum_{i=1}^{k}\beta_1^{k-i}(1-\beta_1)dW_{(i)}$$
 
 이다.
 
@@ -150,7 +150,7 @@ $$식(13) \Rightarrow \sum_{i=1}^{k}\beta_1^{k-i}(1-\beta_1)V_{dw(i)}$$
 
 이제, 이 Momentum의 의미를 다시 생각해보기 위해 식 (11)을 한번 다시 보도록 하자.
 
-식 (11)을 보면 현재의 속도 $V_{dw(3)}$은 과거의 속도들에 영향을 받는데, 현재 iteration 대비 이전 값일 수록 $\beta_1$ 값이 더 많이 곱해져있어서 최근의 속도 값들이 더 큰 영향을 주는 것을 알 수 있다.
+식 (11)을 보면 현재의 속도 $V_{dw(3)}$은 과거의 $dW$들에 영향을 받는데, 현재 iteration 대비 이전 값일 수록 $\beta_1$ 값이 더 많이 곱해져있어서 최근의 속도 값들이 더 큰 영향을 주는 것을 알 수 있다. $dW_{(i)}$는 생각해보면 $i$ 번째 시점의 순간적인 힘에 비유할 수 있으므로 과거의 영향은 갈수록 줄어든다는 걸 볼 수 있다.
 
 즉, Gradient의 진행이 그림 1에서와 같았다면 위 아래로 변하는 b축 gradient factor들은 더하기 빼기 해주게 되면서 서서히 속도가 0으로 가까워 질 것이고, 오른쪽으로 계속 진행되는 gradient의 W축 방향 factor들은 계속 더해주게 되어 관성이 작용하는 것 처럼 속도가 점점 붙을 것이다.
 
