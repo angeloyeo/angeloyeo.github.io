@@ -48,11 +48,35 @@ $$A = \begin{bmatrix}
 그렇다면 식 (2)의 행렬 $A$는 다음과 같이 인수분해 할 수 있다.
 
 $$A = \begin{bmatrix} | & | & \text{ } & | \\ a_1 & a_2 & \cdots & a_n \\ | & | & \text{ } & | \end{bmatrix}
-\begin{bmatrix}\lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & 0 & 0 \\ \text{ } & \text{ } & \ddots & \text{ } \\ 0 & 0 & \cdots & \lambda_n\end{bmatrix}$$
+\begin{bmatrix}\lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & 0 & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda_n\end{bmatrix}$$
 
 [//]:# (식 3)
 
-이 곱셈이 어렵다고 생각하지 말고, 왼쪽에 곱해지는 행렬의 각각의 벡터를 숫자처럼 생각하고 연산하면 쉽게 식 (3)이 옳다는 것을 알 수 있다.
+이를 증명하기 위해 아래와 같이 수행해볼 수 있다. 우선 
+
+$$\begin{bmatrix} | \\ a_1 \\ | \end{bmatrix}$$ 
+
+[//]:# (식 4)
+
+과 같이 쓴 벡터를 풀어서 
+
+$$\begin{bmatrix} a_{11} \\ a_{21} \\ \vdots \\ a_{n1} \end{bmatrix}$$
+
+[//]:# (식 5)
+
+과 같이 써서 식 (3)을 아래와 같이 고쳐 쓸 수 있다.
+
+$$A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{n1} & a_{n2} & \cdots & a_{nn} \end{bmatrix}
+\begin{bmatrix}\lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & 0 & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda_n\end{bmatrix}$$
+
+[//]:# (식 6)
+
+$$ = \begin{bmatrix} \lambda_1a_{11} & \lambda_2a_{12} & \cdots & \lambda_na_{1n} \\ \lambda_1 a_{21} & \lambda_2a_{22} & \cdots & \lambda_n a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \lambda_1 a_{n1} & \lambda_2 a_{n2} & \cdots & \lambda_n a_{nn} \end{bmatrix}
+$$
+
+[//]:# (식 7)
+
+즉, 식 (3)과 식 (2)는 같음을 알 수 있다.
 
 # 고윳값 분해
 
@@ -62,7 +86,7 @@ $$A = \begin{bmatrix} | & | & \text{ } & | \\ a_1 & a_2 & \cdots & a_n \\ | & | 
 
 $$Av_i = \lambda_i v_i\text{ for } i = 1, 2, \cdots, n$$
 
-[//]:# (식 4)
+[//]:# (식 8)
 
 그러면 우리는 고유벡터들을 모아둔 행렬 $V\in\Bbb{R}^{n\times n}$를 아래와 같이 생각할 수 있다.
 
@@ -71,9 +95,9 @@ $$V = \begin{bmatrix}
    v_1 & v_2 & \cdots & v_n \\ 
    | &  | & \text{ } &  | \end{bmatrix}$$
 
-[//]:# (식 5)
+[//]:# (식 9)
 
-이 때, 행렬 $A$와 행렬 $V$의 관계를 식 (4)를 이용해 한꺼번에 표현하면 다음과 같다.
+이 때, 행렬 $A$와 행렬 $V$의 관계를 식 (8)을을 이용해 한꺼번에 표현하면 다음과 같다.
 
 $$AV =  \begin{bmatrix} 
    | &  | & \text{ } &  | \\ 
@@ -81,25 +105,25 @@ $$AV =  \begin{bmatrix}
    | &  | & \text{ } &  | \end{bmatrix}
 $$
 
-[//]:# (식 6)
+[//]:# (식 10)
 
 또 고윳값들을 대각성분에 모아둔 행렬 $\Lambda \in \Bbb{R} ^{n \times n}$을 아래와 같이 생각해본다면,
 
 $$\Lambda = \begin{bmatrix}\lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & 0 & 0 \\ \text{ } & \text{ } & \ddots & \text{ } \\ 0 & 0 & \cdots & \lambda_n\end{bmatrix}$$
 
-[//]:# (식 7)
+[//]:# (식 11)
 
-식 (2)와 식 (3)에서 본 관계를 이용해 식 (6)을 아래와 같이 쓸 수 있다.
+식 (2)와 식 (3)에서 본 관계를 이용해 식 (10)을 아래와 같이 쓸 수 있다.
 
-$$식 (6) \Rightarrow AV = V\Lambda$$
+$$식 (10) \Rightarrow AV = V\Lambda$$
 
-[//]:# (식 8)
+[//]:# (식 12)
 
-만약 모든 고유벡터들이 선형독립이라면 식 (8)로부터 아래와 같이 행렬 $A$를 쓸 수 있다.
+만약 모든 고유벡터들이 선형독립이라면 식 (12)로부터 아래와 같이 행렬 $A$를 쓸 수 있다.
 
 $$A = V\Lambda V^{-1}$$
 
-[//]:# (식 9)
+[//]:# (식 13)
 
 ## 고윳값 분해의 기하학적 의미
 
@@ -122,7 +146,7 @@ $$\vec{v}_1 = \begin{bmatrix}0.6089 \\ 0.7933\end{bmatrix}$$
 
 $$\vec{v}_2 = \begin{bmatrix}-0.3983 \\ 0.9172\end{bmatrix}$$
 
-행렬 $A$의 고윳값과 고유벡터를 이용해 식 (10)과 같이 행렬 $A$를 분해하기 위한 행렬들을 써보면 아래와 같다.
+행렬 $A$의 고윳값과 고유벡터를 이용해 식 (14)와 같이 행렬 $A$를 분해하기 위한 행렬들을 써보면 아래와 같다.
 
 $$V = \begin{bmatrix}0.6089 & -0.3983 \\ 0.7933 & 0.9172\end{bmatrix}$$
 
@@ -181,11 +205,11 @@ $V^{-1}$, $\Lambda$, $V$의 각각의 선형 변환을 차례대로 적용하면
 
 $$A=A^T$$
 
-만약, 행렬 $A$가 식 (9)에서와 같이 고윳값 분해할 수 있다면 아래의 내용이 성립한다.
+만약, 행렬 $A$가 식 (13)에서와 같이 고윳값 분해할 수 있다면 아래의 내용이 성립한다.
 
 $$A = V\Lambda V^{-1} = A^T = (V\Lambda V^{-1})^T = (V^{-1})^T\Lambda^TV^T$$
 
-여기서, $\Lambda$는 대각행렬이므로 $\Lambda^T = \Lambda$이고, $(V^{-1})^T = (V^T)^{-1}$이므로 식 (12)는 다음과 같이 쓸 수도 있다.
+여기서, $\Lambda$는 대각행렬이므로 $\Lambda^T = \Lambda$이고, $(V^{-1})^T = (V^T)^{-1}$이므로 식 (16)는 다음과 같이 쓸 수도 있다.
 
 $$V\Lambda V^{-1} = (V^T)^{-1}\Lambda V^T$$
 
@@ -230,7 +254,7 @@ $$\vec{q}_1 = \begin{bmatrix}0.7071 \\ -0.7071\end{bmatrix}$$
 
 $$\vec{q}_2 = \begin{bmatrix}0.7071 \\ 0.7071\end{bmatrix}$$
 
-행렬 $A$의 고윳값과 고유벡터를 이용해 식 (9)와 같이 행렬 $A$를 분해하기 위한 행렬들을 써보면 아래와 같다.
+행렬 $A$의 고윳값과 고유벡터를 이용해 식 (13)과 같이 행렬 $A$를 분해하기 위한 행렬들을 써보면 아래와 같다.
 
 $$Q = \begin{bmatrix}0.7071 & 0.7071 \\ -0.7071 & 0.7071\end{bmatrix}$$
 
