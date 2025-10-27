@@ -313,7 +313,7 @@ $$Equation(34)-Equation(36) = \left\lbrace Q_x+Q_zg_x+(R_x+R_zg_x)g_y +Rg_{yx}\r
 
 $$- \left\lbrace P_y+P_zg_y + (R_y+R_zg_y)g_x + Rg_{xy}\right\rbrace$$
 
-$$=Q_x-P_y + Q_xg_x-P_zg_y+R_xg_y-R_yg_x$$
+$$=Q_x-P_y + Q_zg_x-P_zg_y+R_xg_y-R_yg_x$$
 
 $$=g_x(Q_z-R_y) + g_y(R_x-P_z) + Q_x-P_y$$
 
