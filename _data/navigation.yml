@@ -556,6 +556,8 @@ docs-ko:
         url:    2021/06/06/Sturm_Liouville.html
       - title:  그린 함수를 이용한 해법
         url:    2021/06/09/Greens_function.html
+      - title:  미분대수방정식 (DAE)
+        url:    2026/03/03/DAE.html
 
   - title:      편미분방정식
     children:
