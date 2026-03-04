@@ -31,9 +31,9 @@ header:
     url: 2019/01/01/donation.html
     
   - titles:
-      ko      : &KO       매트랩 튜토리얼
+      ko      : &KO       MATLAB 정리노트
       ko-KR   : *KO
-      en      : &EN       MATLAB Tutorial
+      en      : &EN       MATLAB 정리노트
       en-GB   : *EN
       en-US   : *EN
       en-CA   : *EN
