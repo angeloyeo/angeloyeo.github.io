@@ -42,7 +42,7 @@ lang: ko
 ## 1. 물리 현상을 수학의 언어로: 미분방정식과 상태(State)
 
 <p align = "center">
-  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pic1.png">
+  <img width = "50%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pic1.png">
   <br>
   그림 1. 카트 + 도립 진자 문제. 그림 출처: 참고 문헌 [1]의 Figure 8.12
 </p>
@@ -103,7 +103,7 @@ y0 = [0; 0; 0; 0];
 
 <p align = "center">
   <video width = "100%" height = "auto" loop autoplay muted>
-    <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pendCartNoInpupt.mp4.avi">
+    <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pendCartNoInpupt.mp4">
   </video>
 </p>
 
@@ -221,7 +221,7 @@ end
 
 <p align = "center">
   <video width = "100%" height = "auto" autoplay muted>
-    <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pendCartPolePlaced.mp4.avi">
+    <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pendCartPolePlaced.mp4">
   </video>
 </p>
 
@@ -234,7 +234,7 @@ p = [-1; -2; -3; -4];
 
 <p align = "center">
   <video width = "100%" height = "auto" autoplay muted>
-    <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pendCartPolePlaced2.mp4.avi">
+    <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pendCartPolePlaced2.mp4">
   </video>
 </p>
 
