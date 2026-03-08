@@ -559,6 +559,11 @@ docs-ko:
       - title:  미분대수방정식 (DAE)
         url:    2026/03/03/DAE.html
 
+  - title:      제어이론(Control Theory)
+    children:
+      - title:  극점 배치법을 활용한 선형 제어기 설계
+        url:    2026/03/08/Pole_Placing.html
+
   - title:      편미분방정식
     children:
       - title:  열방정식/파동방정식의 의미
