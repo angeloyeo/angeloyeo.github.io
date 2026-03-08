@@ -564,7 +564,7 @@ docs-ko:
       - title:  극점 배치법을 활용한 선형 제어기 설계
         url:    2026/03/08/Pole_Placing.html
       - title:  Linear Quadratic Regulator(LQR)
-        url:    2026/03/09/LQR.html
+        url:    2026/03/09/LQR_Optimal_Control.html
 
   - title:      편미분방정식
     children:

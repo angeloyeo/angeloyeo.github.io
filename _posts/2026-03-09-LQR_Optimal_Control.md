@@ -142,7 +142,7 @@ ans =
 
 # 참고 문헌
 
-* [1] Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control, Steven L. Brunton and J. Nathan Kutz (link)[https://databookuw.com/]
+* [1] Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control; Steven L. Brunton and J. Nathan Kutz (link)[https://databookuw.com/]
 
 ---
 
