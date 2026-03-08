@@ -102,7 +102,7 @@ y0 = [0; 0; 0; 0];
 ```
 
 <p align = "center">
-  <video width = "100%" height = "auto" loop autoplay muted>
+  <video width = "100%" height = "auto" loop autoplay controls muted>
     <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pendCartNoInpupt.mp4">
   </video>
 </p>
@@ -220,7 +220,7 @@ end
 ```
 
 <p align = "center">
-  <video width = "100%" height = "auto" autoplay muted>
+  <video width = "100%" height = "auto" autoplay muted controls>
     <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pendCartPolePlaced.mp4">
   </video>
 </p>
@@ -233,7 +233,7 @@ p = [-1; -2; -3; -4];
 ```
 
 <p align = "center">
-  <video width = "100%" height = "auto" autoplay muted>
+  <video width = "100%" height = "auto" autoplay muted controls>
     <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-08-Pole_Placing/pendCartPolePlaced2.mp4">
   </video>
 </p>
