@@ -67,7 +67,7 @@ $$\dot{\mathbf{x}} = f(\mathbf{x}, u) % 식 (2)$$
 
 $$\dot{x} = v % 식 (3)$$
 
-$$\dot{v} = \frac{-m^2L^2g\cos\theta + mL^2(mL\omega^2\sin\theta-\delta v)+mL^2u}{mL^2\left(M+m(1-\cos^2\theta\right)} % 식 (4)$$
+$$\dot{v} = \frac{-m^2L^2g\cos\theta + mL^2(mL\omega^2\sin\theta-\delta v)+mL^2u}{mL^2\left(M+m(1-\cos^2\theta\right))} % 식 (4)$$
 
 $$\dot{\theta} = \omega % 식 (5)$$
 
