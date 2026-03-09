@@ -557,7 +557,7 @@ docs-ko:
       - title:  그린 함수를 이용한 해법
         url:    2021/06/09/Greens_function.html
       - title:  ODE 암시적 솔버 (implicit solvers)
-        url:    2026/03/10/ODE_implicit_solvers.html  
+        url:    2026/03/02/ODE_implicit_solvers.html  
       - title:  미분대수방정식 (DAE)
         url:    2026/03/03/DAE.html
 
