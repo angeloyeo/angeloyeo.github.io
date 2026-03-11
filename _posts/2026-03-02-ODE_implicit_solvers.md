@@ -245,9 +245,9 @@ Manual (h=0.5) Steps: 401
 ```
 
 <p align = "center">
-  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/picn.png">
+  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/pic7.png">
   <br>
-  그림 n. ode45, ode15s와 함께 수동으로 구현한 implicit solver의 결과 비교
+  그림 7. ode45, ode15s와 함께 수동으로 구현한 implicit solver의 결과 비교
 </p>
 
 
