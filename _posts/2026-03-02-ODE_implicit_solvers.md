@@ -19,22 +19,79 @@ lang: ko
 
 # 솔버의 두 얼굴: Forward Euler vs. Backward Euler
 
-미분 방정식 $\dot{x} = f(x)$를 컴퓨터로 풀기 위해서는 연속적인 시간을 잘게 쪼개는 '이산화(Discretization)' 과정이 필요하다. 이때 기울기를 어디서 가져오느냐에 따라 솔버의 운명이 갈린다.
+우선 컴퓨터가 ODE를 이산화해서 푸는 방법에 대해 먼저 이해해보자. 아주 기초적인 1차, 1계 미분방정식의 예로부터 시작해보자.
 
-## 1. Forward Euler (전방 오일러: Explicit)
+$$\frac{dx}{dt}=f(t, x) % 식 (1)$$
+
+식 (1)은 1차, 1계 미분방정식인데 이 식을 이해하는 방법은 크게 두 가지이다. 우선 미분 계수를 좌변에 모두 몰아넣고, 우변에는 $t$와 $x$로 구성된 다항식을 몰아넣은 것으로 보는 것이다. 생긴것 그대로 이해하는 것이라고 할 수 있다. 두 번째 방법은 좌변과 우변을 뒤집어서 생각해본 것으로 모든 $(t,x)$에 기울기 $dx/dt$가 정의되어 있다고 이해하는 것이다.
+
+예를 들어 $dx/dt=x$의 경우 아래와 같이 모든 $(t, x)$에 아래와 같이 기울기가 세로축의 $x$의 값에 비례하는 기울기가 정의되어 있는 것을 알 수 있다. 그림 1과 같은 것을 "방향장 (direction field)"라고 부른다.
+
+<p align = "center">
+  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/pic1.png">
+  <br>
+  그림 1. 미분 방정식 dx/dt=x 의 방향장
+</p>
+
+이렇듯 방향장을 생각해볼 수 있다면, 우리가 점을 하나 놓기만 하면 그 앞뒤의 값들을 그 점이 놓인 기울기를 가지고 예측할 수 있다는 것을 생각해볼 수 있다.
+
+
+<p align = "center">
+  <video width = "100%" height = "auto" loop autoplay muted>
+    <source src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/vid1.mp4">
+  </video>
+  <br>
+  그림 2. 방향장 위에 점을 하나 놓으면 그 점 앞뒤의 값들을 예측해볼 수 있다.
+</p>
+
+미분방정식은 수식을 전개해가면서 풀 수도 있지만 그림 2에서와 같이 초기값과 그 전후의 관계를 통해서 수치적으로 푸는 것도 가능하다. 이처럼 수치적으로 미분 방정식 $\dot{x} = f(x)$을 풀기 위해서는 연속적인 시간을 잘게 쪼개는 '이산화(Discretization)' 과정이 필요하다. 즉, 하나의 이어진 선으로 볼 게 아니라 앞 뒤 점들을 찾는 과정으로 생각해보자.
+
+<p align = "center">
+  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/pic3.png">
+  <br>
+  그림 3. 미분 방정식 (예:dx/dt=x) 의 방향장에서 초기값의 전후 값을 이산적으로 찾을 수 있다.
+</p>
+
+앞 뒤 점의 $x$가 무엇인지 결정하는 방법은 크게 explicit 방법과 implicit 방법으로 나눌 수 있다.
+
+## 1. Explicit Solver (대표적으로 Forward Euler)
+
+<p align = "center">
+  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/pic4.png">
+  <br>
+  그림 4. Explicit solver가 초기값 전후의 값을 찾아가는 방법
+</p>
 
 가장 직관적인 방법이다. 현재 지점($x_n$)에서의 기울기를 보고 다음 지점($x_{n+1}$)을 결정한다.
 
 $$x_{n+1} = x_n + h \cdot f(x_n)$$
 
+그림 4에서 처럼 초기값이 놓여지면 그 초기값의 변화율 관계를 통해 다음 값을 찾는다. 우리는 $f(t, x)$에 대응하는 모든 기울기 혹은 변화율을 알고 있으므로 이와 같은 계산이 가능하다.
+
 * 장점: 계산이 매우 빠르고 단순하다. 우변에 모르는 값($x_{n+1}$)이 없기 때문에 바로 답이 나온다.
 * 단점: 시스템이 급격히 변하는(Stiff) 구간에서 보폭($h$)을 조금만 크게 가져가도 궤도를 이탈하며 결과가 폭발(발산)한다. 소위 '눈 감고 뛰는 것'과 비슷하다.
 
-## 2. Backward Euler (후방 오일러: Implicit)
+## 2. Implicit Solver (대표적으로 Backward Euler)
 
-반면, 후방 오일러는 내가 도착할 미래 지점($x_{n+1}$)에서의 기울기를 미리 참조한다.
+Implicit Solver는 Explicit Solver가 했던 일에서 추가 확인을 거친다.
+
+<p align = "center">
+  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/pic5.png">
+  <br>
+  그림 5. Implicit Solver는 다음 스텝의 값이 지금까지의 경향과 얼마나 일치하는지도 확인한다.
+</p>
+
+다시 말해, 후방 오일러는 내가 도착할 미래 지점($x_{n+1}$)에서의 기울기를 미리 참조한다.
 
 $$x_{n+1} = x_n + h \cdot f(x_{n+1})$$
+
+이 때 $x_{n+1}$ 값은 Explicit solver가 했던 것 처럼 한번 구한 것을 초기값으로 쓰고 그 이후에 Error가 적어질 수 있도록 내부적으로 Newton-Raphson 방법 등을 활용한다. 에러가 특정 기준보다 작아지거나 반복회수를 초과하면 추가 확인을 마치거나 할 수 있다.
+
+<p align = "center">
+  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/pic6.png">
+  <br>
+  그림 6. Implicit Solver의 작업 흐름도
+</p>
 
 * 특징: 식의 양변에 모두 $x_{n+1}$이 들어있다. 즉, $x_{n+1}$을 구하기 위해선 방정식을 다시 풀어야 하는 '암시적(Implicit)' 구조다.
 * 장점: 수학적으로 매우 안정적이다. 미래의 기울기를 미리 반영하기 때문에 보폭을 크게 가져가도 궤도를 크게 벗어나지 않는다.
@@ -188,9 +245,9 @@ Manual (h=0.5) Steps: 401
 ```
 
 <p align = "center">
-  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/pic1.png">
+  <img width = "100%" src = "https://raw.githubusercontent.com/angeloyeo/angeloyeo.github.io/master/pics/2026-03-02-ODE_implicit_solvers/picn.png">
   <br>
-  그림 1. ode45, ode15s와 함께 수동으로 구현한 implicit solver의 결과 비교
+  그림 n. ode45, ode15s와 함께 수동으로 구현한 implicit solver의 결과 비교
 </p>
 
 
