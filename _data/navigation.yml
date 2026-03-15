@@ -560,6 +560,8 @@ docs-ko:
         url:    2026/03/02/ODE_implicit_solvers.html  
       - title:  미분대수방정식 (DAE)
         url:    2026/03/03/DAE.html
+      - title:  Euler-Lagrange 방정식 (변분법)
+        url:    2026/03/15/Euler_Lagrange.html
 
   - title:      제어이론(Control Theory)
     children:
