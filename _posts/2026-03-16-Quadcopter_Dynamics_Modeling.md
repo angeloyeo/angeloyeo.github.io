@@ -252,7 +252,205 @@ M(\eta)^{-1}(\tau_\eta-C\dot\eta)
 
 이렇게 도출된 모델은 **MPC(모델 예측 제어)** 와 같은 고급 제어 알고리즘의 '엔진'이 되어, 쿼드콥터가 스스로 미래를 예측하며 비행할 수 있게 만든다.
 
-**마치며:**
+# MATLAB을 이용한 상태 함수 구축과 Jacobian 도출
+
+참고 문헌 [2]에서와 같이 지금까지의 내용은 MATLAB의 Symbolic Math Toolbox를 이용해서 상태 함수로 구축하는 것이 가능하며, 특히 손 쉽게 상태 함수의 Jacobian을 계산할 수 있다.
+
+우선, $\eta$에 해당하는 롤, 피치, 요 각도를 정의하도록 하자.
+
+```
+syms phi(t) theta(t) psi(t)
+
+% Transformation matrix for angular velocities from inertial frame
+% to body frame
+W = [ 1,  0,        -sin(theta);
+      0,  cos(phi),  cos(theta)*sin(phi);
+      0, -sin(phi),  cos(theta)*cos(phi) ];
+
+% Rotation matrix R_ZYX from body frame to inertial frame
+
+function [Rz,Ry,Rx] = rotationMatrixEulerZYX(phi,theta,psi)
+% Euler ZYX angles convention
+    Rx = [ 1,           0,          0;
+           0,           cos(phi),  -sin(phi);
+           0,           sin(phi),   cos(phi) ];
+    Ry = [ cos(theta),  0,          sin(theta);
+           0,           1,          0;
+          -sin(theta),  0,          cos(theta) ];
+    Rz = [cos(psi),    -sin(psi),   0;
+          sin(psi),     cos(psi),   0;
+          0,            0,          1 ];
+    if nargout == 3
+        % Return rotation matrix per axes
+        return;
+    end
+    % Return rotation matrix from body frame to inertial frame
+    Rz = Rz*Ry*Rx;
+end
+
+R = rotationMatrixEulerZYX(phi,theta,psi);
+```
+
+그리고 관성 좌표계의 inertia matrix에 해당하는 $J$를 정의하도록 하자. 이는 식 (13)과 식 (14) 사이에서 언급한 것을 확인할 수 있다.
+
+```
+% Create symbolic variables for diagonal elements of inertia matrix
+syms Ixx Iyy Izz
+
+% Inertial frame velocities from body fixed frames to inertial frame.
+I = [Ixx, 0, 0; 0, Iyy, 0; 0, 0, Izz];
+J = W.'*I*W;
+```
+
+이제 Coriolis matrix $C(\eta,\dot\eta)$를 정의하도록 하자. 이는 식 (25)와 식 (26) 사이에서 언급되었으며 다시 한번 쓰자면 아래와 같다.
+
+$$C(\eta,\dot\eta)=\frac{d}{dt}J-\frac{1}{2}\frac{\partial}{\partial \eta}(\dot\eta^TJ)$$
+
+```
+% Coriolis matrix
+dJ_dt = diff(J);
+h_dot_J = [diff(phi,t), diff(theta,t), diff(psi,t)]*J;
+grad_temp_h = transpose(jacobian(h_dot_J,[phi theta psi]));
+C = dJ_dt - 1/2*grad_temp_h;
+C = subsStateVars(C,t);
+```
+
+이제 몇 $\tau_\eta$와 전체 Thrust인 $U_1$을 정의하도록 하자. 아래 MATLAB 코드에서는 Thrust를 $T$로 썼다.
+
+```
+% Define fixed parameters and control input
+% k: lift constant
+% l: distance between rotor and center of mass
+% m: quadrotor mass
+% b: drag constant
+% g: gravity
+% ui: squared angular velocity of rotor i as control input
+syms k l m b g u1 u2 u3 u4
+
+% Torques in the direction of phi, theta, psi
+tau_beta = [l*k*(-u2+u4); l*k*(-u1+u3); b*(-u1+u2-u3+u4)];
+
+% Total thrust
+T = k*(u1+u2+u3+u4);
+```
+
+이렇게 하여 필요한 변수 정의들은 완료되었고, 본격적으로 state를 정의할 수 있게 된다.
+
+```
+% Create symbolic functions for time-dependent positions
+syms x(t) y(t) z(t)
+
+% Create state variables consisting of positions, angles,
+% and their derivatives
+state = [x; y; z; phi; theta; psi; diff(x,t); diff(y,t); ...
+    diff(z,t); diff(phi,t); diff(theta,t); diff(psi,t)];
+state = subsStateVars(state,t);
+```
+
+또한, 식 (29)에서와 같이 상태 방정식을 정의하면 아래와 같다. 여기서 $\alpha_T$ 에 대한 고려는 없는 것을 알 수 있다. 이것은 MPC 제어기에 넣을 상태 방정식에 대해서는 기체 자체에 대한 모델링만 하는 것이 바람직하기 때문이다.
+
+```
+f = [ % Set time-derivative of the positions and angles
+      state(7:12);
+
+      % Equations for linear accelerations of the center of mass
+      -g*[0;0;1] + R*[0;0;T]/m;
+
+      % Euler–Lagrange equations for angular dynamics
+      inv(J)*(tau_beta - C*state(10:12))
+];
+
+f = subsStateVars(f,t);
+```
+
+참고문헌 [2]에서는 파라미터 변수들에 특정 값들을 집어 넣어서 사용하고 있긴 하여 여기에도 적어둔다.
+
+```
+% Replace fixed parameters with given values here
+IxxVal = 1.2;
+IyyVal = 1.2;
+IzzVal = 2.3;
+kVal = 1;
+lVal = 0.25;
+mVal = 2;
+bVal = 0.2;
+gVal = 9.81;
+
+f = subs(f, [Ixx Iyy Izz k l m b g], ...
+    [IxxVal IyyVal IzzVal kVal lVal mVal bVal gVal]);
+f = simplify(f);
+```
+
+마지막으로 state와 state의 Jacobian을 계산할 수 있게 된다. 이 부분이 Symbolic Math Toolbox를 이용하는 백미라고 할 수 있다.
+
+```
+% Calculate Jacobians for nonlinear prediction model
+A = jacobian(f,state);
+control = [u1; u2; u3; u4];
+B = jacobian(f,control);
+```
+
+그리고 이 state와 jacobian을 MATLAB Function으로 출력해준다. 이렇게 해주어서 추후 MPC 모델링에 그대로 가져다 쓸 수 있다. 
+
+```
+% Create QuadrotorStateFcn.m with current state and control
+% vectors as inputs and the state time-derivative as outputs
+matlabFunction(f,'File','QuadrotorStateFcn', ...
+    'Vars',{state,control});
+
+% Create QuadrotorStateJacobianFcn.m with current state and control
+% vectors as inputs and the Jacobians of the state time-derivative
+% as outputs
+matlabFunction(A,B,'File','QuadrotorStateJacobianFcn', ...
+    'Vars',{state,control});
+```
+
+이외 Helper 함수들은 아래에 적어둔다.
+
+```
+function stateExpr = subsStateVars(timeExpr,var)
+    if nargin == 1 
+        var = sym("t");
+    end
+    repDiff = @(ex) subsStateVarsDiff(ex,var);
+    stateExpr = mapSymType(timeExpr,"diff",repDiff);
+    repFun = @(ex) subsStateVarsFun(ex,var);
+    stateExpr = mapSymType(stateExpr,"symfunOf",var,repFun);
+    stateExpr = formula(stateExpr);
+end
+
+function newVar = subsStateVarsFun(funExpr,var)
+    name = symFunType(funExpr);
+    name = replace(name,"_Var","");
+    stateVar = "_" + char(var);
+    newVar = sym(name + stateVar);
+end
+
+function newVar = subsStateVarsDiff(diffExpr,var)
+    if nargin == 1 
+      var = sym("t");
+    end
+    c = children(diffExpr);
+    if ~isSymType(c{1},"symfunOf",var)
+      % not f(t)
+      newVar = diffExpr;
+      return;
+    end
+    if ~any([c{2:end}] == var)
+      % not derivative wrt t only
+      newVar = diffExpr;
+      return;
+    end
+    name = symFunType(c{1});
+    name = replace(name,"_Var","");
+    extension = "_" + join(repelem("d",numel(c)-1),"") + "ot";
+    stateVar = "_" + char(var);
+    newVar = sym(name + extension + stateVar);
+end
+```
+
+# 마치며
+
 결국 쿼드콥터의 모델링은 **"우리가 가해준 에너지($U_1, \tau$)가 어떻게 기체의 운동 에너지로 변환되는가"** 를 추적하는 과정이었다. 수식은 복잡해 보이지만 그 바탕은 $F=ma$가 좀 더 복잡하게 써진 것이라고 볼 수 있다. 이렇게 구한 쿼드콥터의 동적 모델을 이용해서 다음 편에선 쿼드콥터의 MPC를 이해해보고자 한다.
 
 # 참고 문헌
