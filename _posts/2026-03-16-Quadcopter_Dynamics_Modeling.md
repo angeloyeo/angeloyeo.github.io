@@ -381,7 +381,7 @@ f = subs(f, [Ixx Iyy Izz k l m b g], ...
 f = simplify(f);
 ```
 
-마지막으로 state와 state의 Jacobian을 계산할 수 있게 된다. 이 부분이 Symbolic Math Toolbox를 이용하는 백미라고 할 수 있다.
+마지막으로 state의 Jacobian을 계산할 수 있게 된다. 이 부분이 Symbolic Math Toolbox를 이용하는 백미라고 할 수 있다.
 
 ```
 % Calculate Jacobians for nonlinear prediction model
