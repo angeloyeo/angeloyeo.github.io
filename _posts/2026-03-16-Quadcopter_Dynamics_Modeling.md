@@ -196,9 +196,9 @@ $$
 
 $$\text{식 (9)} \Rightarrow \frac{d}{dt}\left(\frac{\partial L}{\partial \dot \eta}\right)-\frac{\partial L}{\partial \eta}=\tau_\eta % 식 (21)$$
 
-여기서 $\tau_\eta$는 기체를 회전시키기 위해 각 모터의 속도 차이로 만들어내는 롤, 피치, 요 방향의 회전력을 의미한다. 전개를 계속해보면,
+여기서 $\tau_\eta$는 기체를 회전시키기 위해 각 모터의 속도 차이로 만들어내는 롤, 피치, 요 방향의 회전력을 의미한다. 식 (21)을 부분적으로 전개해보면,
 
-$$\frac{d}{dt}\left(J\dot\eta\right)=J(\eta)\ddot\eta+\dot J(\eta, \dot\eta)\dot\eta % 식 (22)$$
+$$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot \eta}\right)=\frac{d}{dt}\left(J\dot\eta\right)=J(\eta)\ddot\eta+\dot J(\eta, \dot\eta)\dot\eta % 식 (22)$$
 
 이고
 
