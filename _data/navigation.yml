@@ -562,6 +562,8 @@ docs-ko:
         url:    2026/03/03/DAE.html
       - title:  Euler-Lagrange 방정식 (변분법)
         url:    2026/03/15/Euler_Lagrange.html
+      - title:  쿼드콥터의 동역학 모델링
+        url:    2026/03/16/Quadcopter_Dynamics_Modeling.html
 
   - title:      제어이론(Control Theory)
     children:
